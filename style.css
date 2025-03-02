@@ -1,0 +1,54 @@
+/* Reset */
+*,
+*::after,
+*::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+*{
+	font-family: "Geist Mono";
+	font-weight: 550;
+}
+
+body {
+	height: 100vh;
+	font-family: sans-serif;
+	overflow-y: hidden;
+}
+
+/* full screen */
+textarea {
+	resize: none;
+	height: 100%;
+	width: 100%;
+	border: none;
+	padding: 10px 3px;
+	white-space: pre-line;
+	font-family: "Geist Mono";
+	font-weight: 500;
+	font-size: medium;
+}
+
+textarea:focus {
+	outline: none;
+}
+
+/* dark-mode thin scrollbar for document */
+::-webkit-scrollbar {
+	width: 5px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #888;
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
