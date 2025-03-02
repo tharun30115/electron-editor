@@ -4,7 +4,6 @@ window.electronAPI.fileOpened((event, data) => {
 });
 
 // listen for ctrl+s or cmd+s and save the file
-
 document.addEventListener("keydown", async (event) => {
   if ((event.ctrlKey || event.metaKey) && event.key === "s") {
     event.preventDefault();
