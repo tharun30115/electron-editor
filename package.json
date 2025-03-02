@@ -9,7 +9,7 @@
 		"build": ""
 	},
 	"keywords": [],
-	"author": "As a Programmer",
+	"author": "Tharun",
 	"license": "MIT",
 	"devDependencies": {
 		"electron": "^28.3.3"
