@@ -29,7 +29,13 @@ const createWindow = () => {
 };
 
 app.whenReady().then(() => {
-  ipcMain.handle("save-file", (event, args) => saveFile(args));
+  ipcMain.handle("save-file", async (event, args) => {
+    const result = await saveFile(args);
+    if (result && result.filePath) {
+      mainWindow.webContents.send('file-saved', result);
+    }
+    return result;
+  });
   ipcMain.handle("open-file", openFile);
   createWindow();
 });

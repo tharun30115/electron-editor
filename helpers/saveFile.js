@@ -2,12 +2,12 @@ const { dialog } = require("electron");
 const fs = require("fs");
 
 async function saveFile(data) {
-  const { content, filePath } = data;
+  const { content, filePath, saveAs } = data;
   
-  if (!filePath) {
+  if (!filePath || saveAs) {
     const { filePath: newFilePath } = await dialog.showSaveDialog({
       title: "Save File",
-      defaultPath: "filename.txt",
+      defaultPath: filePath || "filename.txt",
       filters: [{ name: "Text Files", extensions: ["txt"] }],
     });
     

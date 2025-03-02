@@ -64,31 +64,38 @@ const App = () => {
     }));
   };
 
-  const handleSave = async () => {
+  const handleSave = async (saveAs = false) => {
     const currentTab = tabs.find(tab => tab.id === activeTab);
     if (currentTab && electron) {
       try {
         await electron.saveFile({
           content: currentTab.content,
-          filePath: currentTab.filePath
+          filePath: currentTab.filePath,
+          saveAs
         });
       } catch (error) {
         console.error('Failed to save file:', error);
       }
     }
   };
-
   useEffect(() => {
-    const handleKeyPress = (e) => {
-      if (e.ctrlKey && e.key === 's') {
-        e.preventDefault();
-        handleSave();
-      }
-    };
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
+    if (electron) {
+      const handleKeyPress = (e) => {
+        if (e.ctrlKey && e.key === 's') {
+          e.preventDefault();
+          handleSave(e.shiftKey); // If Shift is pressed, trigger Save As
+        }
+      };
+  const handleMenuSave = () => handleSave(false);
+  const handleMenuSaveAs = () => handleSave(true);
+  window.addEventListener('keydown', handleKeyPress);
+  electron.onMenuSave(handleMenuSave);
+  electron.onMenuSaveAs(handleMenuSaveAs);
+  return () => {
+    window.removeEventListener('keydown', handleKeyPress);
+  };
+    }
   }, [tabs, activeTab]);
-
   return (
     <div className="tab-container">
       <div className="tabs-header">

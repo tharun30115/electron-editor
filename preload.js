@@ -4,6 +4,8 @@ const { contextBridge, ipcRenderer } = require('electron');
 contextBridge.exposeInMainWorld('electron', {
   onFileOpen: (callback) => ipcRenderer.on('file-opened', (_, data) => callback(data)),
   onFileSaved: (callback) => ipcRenderer.on('file-saved', (_, data) => callback(data)),
+  onMenuSave: (callback) => ipcRenderer.on('menu-save', () => callback()),
+  onMenuSaveAs: (callback) => ipcRenderer.on('menu-save-as', () => callback()),
   saveFile: (data) => ipcRenderer.invoke('save-file', data),
   openFile: () => ipcRenderer.invoke('open-file')
 });
