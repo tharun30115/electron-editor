@@ -1,22 +1,24 @@
 const { dialog } = require("electron");
 const fs = require("fs");
 
-async function saveFile(event, data) {
-  const { filePath } = await dialog.showSaveDialog({
-    title: "Save File",
-    defaultPath: "filename.txt", // Default file name
-    filters: [{ name: "Text Files", extensions: ["txt"] }],
-  });
-
-  if (filePath) {
-    fs.writeFile(filePath, data, (err) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
+async function saveFile(data) {
+  const { content, filePath } = data;
+  
+  if (!filePath) {
+    const { filePath: newFilePath } = await dialog.showSaveDialog({
+      title: "Save File",
+      defaultPath: "filename.txt",
+      filters: [{ name: "Text Files", extensions: ["txt"] }],
     });
-    return filePath;
+    
+    if (!newFilePath) return;
+    
+    await fs.promises.writeFile(newFilePath, content);
+    return { filePath: newFilePath };
   }
+  
+  await fs.promises.writeFile(filePath, content);
+  return { filePath }
 }
 
 module.exports = saveFile;
