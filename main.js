@@ -3,6 +3,7 @@ const createMenu = require("./helpers/createMenu");
 const path = require("node:path");
 const saveFile = require("./helpers/saveFile");
 
+
 let mainWindow;
 const createWindow = () => {
 	mainWindow = new BrowserWindow({
@@ -17,10 +18,12 @@ const createWindow = () => {
 	mainWindow.loadFile("index.html");
 };
 
+
 app.whenReady().then(() => {
 	ipcMain.handle("save-file", saveFile);
 	createWindow();
 });
+
 
 app.on("window-all-closed", () => {
 	if (process.platform !== "darwin") {
