@@ -4,7 +4,7 @@ import './App.css';
 const App = () => {
   // Initialize electron from window object
   const electron = window.electron;
-  const [tabs, setTabs] = useState([{ id: 1, name: 'untitled', content: '', unsaved: false, filePath: null }]);
+  const [tabs, setTabs] = useState([{ id: Date.now(), name: 'untitled', content: '', unsaved: false, filePath: null }]);
   const [activeTab, setActiveTab] = useState(1);
 
   useEffect(() => {
@@ -37,12 +37,12 @@ const App = () => {
 
   const createNewTab = () => {
     const newTab = {
-      id: tabs.length + 1,
+      id: Date.now(),
       name: 'untitled',
       content: '',
       unsaved: false
     };
-    setTabs([...tabs, newTab]);
+    setTabs(prevTabs => [...prevTabs, newTab]);
     setActiveTab(newTab.id);
   };
 
@@ -86,19 +86,47 @@ const App = () => {
           handleSave(e.shiftKey); // If Shift is pressed, trigger Save As
         }
       };
-  const handleMenuSave = () => handleSave(false);
-  const handleMenuSaveAs = () => handleSave(true);
-  window.addEventListener('keydown', handleKeyPress);
-  electron.onMenuSave(handleMenuSave);
-  electron.onMenuSaveAs(handleMenuSaveAs);
-  return () => {
-    window.removeEventListener('keydown', handleKeyPress);
-  };
+      const handleMenuSave = () => handleSave(false);
+      const handleMenuSaveAs = () => handleSave(true);
+      window.addEventListener('keydown', handleKeyPress);
+      electron.onMenuSave(handleMenuSave);
+      electron.onMenuSaveAs(handleMenuSaveAs);
+      return () => {
+        window.removeEventListener('keydown', handleKeyPress);
+        electron.removeAllListeners('menu-save');
+        electron.removeAllListeners('menu-save-as');
+      };
     }
-  }, [tabs, activeTab]);
+  }, [handleSave, electron]);
   return (
     <div className="tab-container">
       <div className="tabs-header">
+        {tabs.map(tab => (
+          <div
+            key={tab.id}
+            className={`tab ${activeTab === tab.id ? 'active' : ''} ${tab.unsaved ? 'unsaved' : ''}`}
+            onClick={() => setActiveTab(tab.id)}
+          >
+            <span>{tab.name}</span>
+            <span
+              className="tab-close"
+              onClick={(e) => {
+                e.stopPropagation();
+                closeTab(tab.id);
+              }}
+            >
+              ×
+            </span>
+          </div>
+        ))}
+        <button className="new-tab-button" onClick={createNewTab}>+</button>
+      </div>
+      <div className="menu-bar">
+        <span className="menu-item">File</span>
+        <span className="menu-item">Edit</span>
+        <span className="menu-item">View</span>
+        <span className="menu-item">Help</span>
+      </div>
         {tabs.map(tab => (
           <div
             key={tab.id}

@@ -8,13 +8,12 @@
 }
 
 * {
-  font-family: "Geist Mono";
-  font-weight: 550;
+  font-family: "Segoe UI", sans-serif;
+  font-weight: normal;
 }
 
 body {
   height: 100vh;
-  font-family: sans-serif;
   overflow-y: hidden;
 }
 
@@ -28,23 +27,42 @@ body {
 .tabs-header {
   display: flex;
   background-color: #f0f0f0;
+  padding: 2px 2px 0 2px;
+  gap: 1px;
   border-bottom: 1px solid #ccc;
-  padding: 5px 5px 0 5px;
-  gap: 2px;
+}
+
+.menu-bar {
+  display: flex;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+  padding: 4px 8px;
+  gap: 16px;
+}
+
+.menu-item {
+  padding: 2px 8px;
+  cursor: pointer;
+  font-size: 13px;
+  border-radius: 3px;
+}
+
+.menu-item:hover {
+  background-color: #e8e8e8;
 }
 
 .tab {
   display: flex;
   align-items: center;
-  background-color: #e4e4e4;
-  padding: 8px 15px;
+  background-color: #e8e8e8;
+  padding: 4px 10px;
   border: 1px solid #ccc;
   border-bottom: none;
-  border-radius: 4px 4px 0 0;
   cursor: pointer;
-  gap: 8px;
-  min-width: 120px;
-  max-width: 200px;
+  gap: 6px;
+  min-width: 100px;
+  max-width: 180px;
+  font-size: 12px;
 }
 
 .tab.active {
@@ -62,11 +80,14 @@ body {
   margin-left: auto;
   cursor: pointer;
   opacity: 0.6;
-  transition: opacity 0.2s;
+  font-size: 14px;
+  padding: 0 2px;
 }
 
 .tab-close:hover {
   opacity: 1;
+  background-color: #e81123;
+  color: white;
 }
 
 .tab-content {
@@ -80,12 +101,12 @@ body {
 }
 
 .new-tab-button {
-  padding: 8px 15px;
+  padding: 4px 8px;
   background: transparent;
   border: none;
   cursor: pointer;
   opacity: 0.6;
-  transition: opacity 0.2s;
+  font-size: 14px;
 }
 
 .new-tab-button:hover {
@@ -98,11 +119,12 @@ textarea {
   height: 100%;
   width: 100%;
   border: none;
-  padding: 10px 3px;
-  white-space: pre-line;
-  font-family: "Geist Mono";
-  font-weight: 500;
-  font-size: medium;
+  padding: 8px;
+  white-space: pre-wrap;
+  font-family: Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  background-color: white;
 }
 
 textarea:focus {
@@ -111,18 +133,18 @@ textarea:focus {
 
 /* Scrollbar styles */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 5px;
+  background: #c1c1c1;
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #a8a8a8;
 }
