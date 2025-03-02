@@ -6,4 +6,5 @@ function createAboutWindow() {
 	win.loadFile("about.html");
 }
 
+
 module.exports = createAboutWindow;
