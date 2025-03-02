@@ -1,17 +1,25 @@
 {
-	"name": "electron-editor",
-	"version": "1.0.0",
-	"description": "A text editor built with Electron",
-	"main": "main.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "electron .",
-		"build": "electron-packager ."
-	},
-	"keywords": [],
-	"author": "Tharun",
-	"license": "MIT",
-	"devDependencies": {
-		"electron": "^28.3.3"
-	}
+  "name": "electron-editor",
+  "version": "1.0.0",
+  "description": "A text editor built with Electron and React",
+  "main": "main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "electron .",
+    "electron-dev": "set NODE_ENV=development && electron ."
+  },
+  "keywords": [],
+  "author": "Tharun",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.2.1"
+  },
+  "devDependencies": {
+    "electron": "^28.3.3",
+    "vite": "^5.0.12"
+  }
 }
