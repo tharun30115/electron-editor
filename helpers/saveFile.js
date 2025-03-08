@@ -7,7 +7,6 @@ async function saveFile(event, data) {
     defaultPath: "filename.txt", // Default file name
     filters: [{ name: "Text Files", extensions: ["txt"] }],
   });
-
   if (filePath) {
     fs.writeFile(filePath, data, (err) => {
       if (err) {
